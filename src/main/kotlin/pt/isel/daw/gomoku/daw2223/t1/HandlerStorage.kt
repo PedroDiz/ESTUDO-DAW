@@ -1,4 +1,4 @@
-package pt.isel.daw.gomoku
+package pt.isel.daw.gomoku.daw2223.t1
 
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component

@@ -1,4 +1,4 @@
-package pt.isel.daw.gomoku
+package pt.isel.daw.gomoku.daw2021.t2
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
