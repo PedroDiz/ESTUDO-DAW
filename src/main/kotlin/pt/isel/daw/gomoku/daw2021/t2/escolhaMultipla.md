@@ -1,6 +1,6 @@
 
 ## Resposta 1.1
-- iii. Nao Safe e idempotente.
+- Nao faço a minima
 
 ## Resposta 1.2
 - iv. O pedido POST é nao safe e nao idempotente.
