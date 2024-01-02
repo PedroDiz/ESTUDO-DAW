@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "jsx": "react",
+    "target": "ES2015",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true
+  }
+}
