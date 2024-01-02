@@ -9,7 +9,7 @@
 - iv.
 
 ## Resposta 1.4
--i. Uma unica instancia desta classe.
+- i. Uma unica instancia desta classe.
 
 ## Resposta 1.5
 - IDK

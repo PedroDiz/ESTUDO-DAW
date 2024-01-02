@@ -1,4 +1,4 @@
-package pt.isel.daw.gomoku.daw2223.ee
+package pt.isel.daw.daw2223.ee
 
 import org.springframework.stereotype.Component
 import java.util.concurrent.locks.ReentrantLock

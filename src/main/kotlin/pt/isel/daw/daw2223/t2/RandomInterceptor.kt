@@ -1,4 +1,4 @@
-package pt.isel.daw.gomoku.daw2223.t2
+package pt.isel.daw.daw2223.t2
 
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse

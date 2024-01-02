@@ -1,17 +1,17 @@
-package pt.isel.daw.gomoku
+package pt.isel.daw
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
-import pt.isel.daw.gomoku.daw2021.t2.MyInterceptor
-import pt.isel.daw.gomoku.daw2223.ee.FaultyInterceptor
-import pt.isel.daw.gomoku.daw2223.t1.MyHandlerInterceptor
-import pt.isel.daw.gomoku.daw2223.t2.RandomInterceptor
+import pt.isel.daw.daw2021.t2.MyInterceptor
+import pt.isel.daw.daw2223.ee.FaultyInterceptor
+import pt.isel.daw.daw2223.t1.MyHandlerInterceptor
+import pt.isel.daw.daw2223.t2.RandomInterceptor
 
 @SpringBootApplication
-class GomokuApplication {}
+class Application {}
 
 @Configuration
 class PipelineConfigurer(
@@ -31,5 +31,5 @@ class PipelineConfigurer(
 }
 
 fun main(args: Array<String>) {
-    runApplication<GomokuApplication>(*args)
+    runApplication<Application>(*args)
 }

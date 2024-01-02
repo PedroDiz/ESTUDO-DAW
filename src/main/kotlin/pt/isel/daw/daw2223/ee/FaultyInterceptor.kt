@@ -1,4 +1,4 @@
-package pt.isel.daw.gomoku.daw2223.ee
+package pt.isel.daw.daw2223.ee
 
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -47,13 +47,15 @@ class FaultyInterceptor(
 
         monitor.withLock {
             map.remove(threadId)
-                faultyStorage.add(ErrorInfo(
+                faultyStorage.add(
+                    ErrorInfo(
                     receivedTimestamp = initialTime,
                     method = httpMethod,
                     path = uri,
                     controllerName = controllerName,
                     methodName = handlerName
-                ))
+                )
+                )
         }
 
     }

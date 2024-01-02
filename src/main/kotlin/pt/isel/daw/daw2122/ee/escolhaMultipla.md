@@ -9,7 +9,7 @@
 - iv.
 
 ## Resposta 1.4
--iv. É criado uma instancia de interceptor. O interceptor é um singleton.
+- iv. É criado uma instancia de interceptor. O interceptor é um singleton.
 
 ## Resposta 1.5
 - IDK

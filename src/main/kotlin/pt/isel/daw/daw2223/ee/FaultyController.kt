@@ -1,4 +1,4 @@
-package pt.isel.daw.gomoku.daw2223.ee
+package pt.isel.daw.daw2223.ee
 
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping

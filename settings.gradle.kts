@@ -1,1 +1,1 @@
-rootProject.name = "Gomoku"
+rootProject.name = "estudo"
