@@ -5,6 +5,8 @@ import jakarta.servlet.http.HttpServletResponse
 import org.springframework.stereotype.Component
 import org.springframework.web.servlet.HandlerInterceptor
 import org.springframework.web.servlet.ModelAndView
+import java.util.concurrent.locks.ReentrantLock
+import kotlin.concurrent.withLock
 
 data class MethodTimed(val method : String, val startTime : Long)
 
@@ -14,6 +16,8 @@ class MethodInterceptor(
 ) : HandlerInterceptor {
 
     private val mapTime = mutableMapOf<Int, MethodTimed>()
+    private val monitor = ReentrantLock()
+
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
 
         if(!request.requestURI.startsWith("/status")) {
@@ -29,7 +33,10 @@ class MethodInterceptor(
         val method = parsedUri[2]
 
         val startTime = System.currentTimeMillis()
-        mapTime[Thread.currentThread().id.toInt()] = MethodTimed(method, startTime)
+        monitor.withLock {
+            mapTime[Thread.currentThread().id.toInt()] = MethodTimed(method, startTime)
+        }
+
         return true
     }
 
@@ -40,7 +47,7 @@ class MethodInterceptor(
         modelAndView: ModelAndView?
     ) {
         val endTime = System.currentTimeMillis()
-        val methodTimed = mapTime[Thread.currentThread().id.toInt()] ?: return
+        val methodTimed = monitor.withLock { mapTime[Thread.currentThread().id.toInt()] ?: return }
         mapTime.remove(Thread.currentThread().id.toInt())
         methodStorage.add(methodTimed.method, endTime - methodTimed.startTime)
     }
