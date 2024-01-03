@@ -6,7 +6,7 @@ import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.withLock
 
 
-data class HandlerInfo(val id : Int, val uri : String, val count : Int)
+data class HandlerInfo(val uri : String, val count : Int)
 
 
 @Component
@@ -19,14 +19,12 @@ class HandlerStorage {
     private val list : MutableList<HandlerInfo> = mutableListOf()
     private val monitor = ReentrantLock()
 
-    fun add(id : Int, uri : String){
+    fun add(uri : String){
         monitor.withLock {
             val handler = list.firstOrNull { it.uri == uri }
-            if(handler != null) {
-                list.remove(handler)
-            }
-            list.add(HandlerInfo(id, uri, (handler?.count ?: 0) + 1))
-            logger.info("Added handler with id $id and uri $uri")
+            if(handler != null) { list.remove(handler) }
+            list.add(HandlerInfo(uri, (handler?.count ?: 0) + 1))
+            logger.info("Added handler with and uri $uri and count ${(handler?.count ?: 0) + 1}")
         }
     }
 
@@ -38,8 +36,8 @@ class HandlerStorage {
 
     fun getById(id : Int) : HandlerInfo? {
         monitor.withLock {
-            logger.info("Getting handler with id $id")
-            return list.firstOrNull { it.id == id }
+            return list.firstOrNull { it.uri.endsWith("/$id") }
         }
     }
+
 }

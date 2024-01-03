@@ -16,12 +16,10 @@ class HandlersController(
     }
 
     @GetMapping(HANDLERS_PATH)
-    fun handlers() {
+    fun handlers() =
         handlersStorage.get()
-    }
+
 
     @GetMapping(HANDLER)
-    fun handler(@PathVariable id : Int) {
-        handlersStorage.getById(id)
-    }
+    fun handler(@PathVariable id : Int) = "Times called ${handlersStorage.getById(id)?.count} "
 }

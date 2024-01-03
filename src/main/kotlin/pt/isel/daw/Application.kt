@@ -23,9 +23,9 @@ class PipelineConfigurer(
 
     override fun addInterceptors(registry: InterceptorRegistry) {
         //registry.addInterceptor(interceptor)
-        //registry.addInterceptor(myHandlerInterceptor)
+        registry.addInterceptor(myHandlerInterceptor)
         //registry.addInterceptor(randomInterceptor)
-        registry.addInterceptor(faultyInterceptor)
+        //registry.addInterceptor(faultyInterceptor)
     }
 
 }
