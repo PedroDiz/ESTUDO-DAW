@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import pt.isel.daw.daw2021.t2.MyInterceptor
+import pt.isel.daw.daw2122.ee.FailureInterceptor
 import pt.isel.daw.daw2122.t2.MethodInterceptor
 import pt.isel.daw.daw2223.ee.FaultyInterceptor
 import pt.isel.daw.daw2223.t1.MyHandlerInterceptor
@@ -20,7 +21,8 @@ class PipelineConfigurer(
     val myHandlerInterceptor : MyHandlerInterceptor,
     val randomInterceptor : RandomInterceptor,
     val faultyInterceptor : FaultyInterceptor,
-    val methodInterceptor: MethodInterceptor
+    val methodInterceptor: MethodInterceptor,
+    val failureInterceptor: FailureInterceptor
 ) : WebMvcConfigurer {
 
     override fun addInterceptors(registry: InterceptorRegistry) {
@@ -28,7 +30,8 @@ class PipelineConfigurer(
         //registry.addInterceptor(myHandlerInterceptor)
         //registry.addInterceptor(randomInterceptor)
         //registry.addInterceptor(faultyInterceptor)
-        registry.addInterceptor(methodInterceptor)
+        //registry.addInterceptor(methodInterceptor)
+        registry.addInterceptor(failureInterceptor)
     }
 
 }
