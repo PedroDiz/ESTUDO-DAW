@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component
 import org.springframework.web.method.HandlerMethod
 import org.springframework.web.servlet.HandlerInterceptor
 import org.springframework.web.servlet.ModelAndView
-import java.util.concurrent.locks.ReentrantLock
-import kotlin.concurrent.withLock
 
 @Component
 class RandomInterceptor : HandlerInterceptor {
@@ -17,15 +15,10 @@ class RandomInterceptor : HandlerInterceptor {
     companion object {
         private val logger = LoggerFactory.getLogger(RandomInterceptor::class.java)
     }
-    private val map = mutableMapOf<Int,Long>()
-    private val monitor = ReentrantLock()
 
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
-        monitor.withLock {
-            val threadId = Thread.currentThread().id.toInt()
-            map[threadId] = System.currentTimeMillis()
-            return true
-        }
+        request.setAttribute("startTime", System.currentTimeMillis())
+        return true
     }
 
     override fun postHandle(
@@ -42,12 +35,10 @@ class RandomInterceptor : HandlerInterceptor {
             val handlerIdentifier = handler.shortLogMessage
             val threadId = Thread.currentThread().id.toInt()
             val currentTime = System.currentTimeMillis()
-            monitor.withLock {
-                val time = currentTime - map[threadId]!!
-                map.remove(threadId)
+            val startTime = request.getAttribute("startTime") as Long
+            val time = currentTime - startTime
                 logger.info("Request to $uri with method $httpMethod and status $status handled by $handlerIdentifier in $time ms" +
                         " on thread $threadId")
             }
         }
     }
-}
